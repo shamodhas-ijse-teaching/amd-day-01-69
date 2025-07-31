@@ -1,29 +1,33 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { View, Text, SafeAreaView, Pressable } from "react-native"
+import React from "react"
+import { Slot, useRouter } from "expo-router"
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+const Layout = () => {
+    const router = useRouter()
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    <SafeAreaView className="flex-1">
+      <Slot />
+      {/* Outlet */}
+      <View className="flex-row justify-around border-gray-300 py-2 bg-white">
+        <Pressable className="py-1 px-4 rounded-lg" onPress={() => {
+            router.push("/")
+        }}>
+          <Text className="text-2xl">Home</Text>
+        </Pressable>
+        <Pressable className="py-1 px-4 rounded-lg" onPress={() => {
+              router.push("/project")
+        }}>
+          <Text className="text-2xl">Project</Text>
+        </Pressable>
+        <Pressable className="py-1 px-4 rounded-lg" onPress={() => {
+              router.push("/user")
+        }}>
+          <Text className="text-2xl">User</Text>
+        </Pressable>
+      </View>
+    </SafeAreaView>
+  )
 }
+
+export default Layout
