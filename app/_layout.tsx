@@ -1,6 +1,7 @@
-import { View, Text, SafeAreaView, Pressable } from "react-native"
+import { View, Text,  Pressable } from "react-native"
 import React from "react"
 import { Slot, useRouter } from "expo-router"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const Layout = () => {
     const router = useRouter()
