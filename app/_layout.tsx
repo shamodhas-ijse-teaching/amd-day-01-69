@@ -1,32 +1,19 @@
-import { View, Text,  Pressable } from "react-native"
+import { View, Text, Pressable } from "react-native"
 import React from "react"
-import { Slot, useRouter } from "expo-router"
+import { Slot, usePathname, useRouter, useSegments } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
+import FooterNav from "@/components/FooterNav"
 
 const Layout = () => {
-    const router = useRouter()
+  const pathname = usePathname() // "/project"
+
+  const hideFooter = ["/login", "/signup"].includes(pathname)
 
   return (
     <SafeAreaView className="flex-1">
       <Slot />
       {/* Outlet */}
-      <View className="flex-row justify-around border-gray-300 py-2 bg-white">
-        <Pressable className="py-1 px-4 rounded-lg" onPress={() => {
-            router.push("/")
-        }}>
-          <Text className="text-2xl">Home</Text>
-        </Pressable>
-        <Pressable className="py-1 px-4 rounded-lg" onPress={() => {
-              router.push("/project")
-        }}>
-          <Text className="text-2xl">Project</Text>
-        </Pressable>
-        <Pressable className="py-1 px-4 rounded-lg" onPress={() => {
-              router.push("/user")
-        }}>
-          <Text className="text-2xl">User</Text>
-        </Pressable>
-      </View>
+      {hideFooter ? null : <FooterNav />}
     </SafeAreaView>
   )
 }
