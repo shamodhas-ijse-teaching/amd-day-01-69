@@ -35,7 +35,7 @@ const Home = () => {
       </Link>
 
       <Link
-        href={"/test/hello"}
+        href={"/item/hello"}
         className="text-2xl bg-green-400 text-white p-4"
       >
         Go test hello
