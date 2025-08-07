@@ -3,7 +3,7 @@ import React from "react"
 import { useRouter, useSegments } from "expo-router"
 
 const tabs = [
-  { lable: "Home", path: "/" },
+  { lable: "Home", path: "/home" },
   { lable: "Project", path: "/project" },
   { lable: "User", path: "/user" }
 ] as const

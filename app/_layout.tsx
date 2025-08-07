@@ -3,6 +3,8 @@ import React from "react"
 import { Slot, usePathname, useRouter, useSegments } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import FooterNav from "@/components/FooterNav"
+import { AuthProvider, useAuth } from "@/context/AuthContext"
+import "./../global.css"
 
 const Layout = () => {
   const pathname = usePathname() // "/project"
@@ -10,11 +12,13 @@ const Layout = () => {
   const hideFooter = ["/login", "/signup"].includes(pathname)
 
   return (
-    <SafeAreaView className="flex-1">
-      <Slot />
-      {/* Outlet */}
-      {hideFooter ? null : <FooterNav />}
-    </SafeAreaView>
+    <AuthProvider>
+      <SafeAreaView className="flex-1">
+        <Slot />
+        {/* Outlet */}
+        {hideFooter ? null : <FooterNav />}
+      </SafeAreaView>
+    </AuthProvider>
   )
 }
 
